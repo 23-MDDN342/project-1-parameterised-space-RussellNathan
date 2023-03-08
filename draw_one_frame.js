@@ -1,10 +1,15 @@
 let t = 0.1;
 let trail = 144;
-let errors;
+let consoletext;
+let errors
 let td = 0;
 
 function preload() {
-	errors = loadStrings('console');
+	consoletext = loadStrings('console');
+	// errors = split(consoletext, 'r');
+    // for (var line = 0; line < lines.length; line++) {
+	// 	console.log(errors[line]);
+	//   }
 }
 
 function draw_one_frame(cur_frac) {
@@ -16,14 +21,12 @@ function draw_one_frame(cur_frac) {
 	for(let i = 0; i <= trail; i++){
 		let ghost_frac = (cur_frac+=1/trail)%1;
 		if (i == trail) {td = 1;} else {td = 0;}
-		drawWindow(100,100+ sin(ghost_frac*TWO_PI)*100,td);
+		drawWindow(150+ sin(1-ghost_frac*TWO_PI)*120,100+ sin(ghost_frac*TWO_PI)*100,td);
 	}
-
-	// blendMode(OVERLAY);
 
 	//cursor
 	strokeCap(PROJECT);
-	strokeJoin(MITER);
+	strokeJoin(ROUND);
 	fill("white");
 	stroke("black");
 	for(let i = 0; i <= t*trail; i++){
@@ -46,11 +49,14 @@ function draw_one_frame(cur_frac) {
 function drawWindow(x,y,td){
 	fill('#fa2a8b');
 	rect(x, y, 640/2, 360/2);
+	rect(x+5, y+5, 640/2-10, 36-10);
 	fill('white');
 	textSize(16);
 	textFont('Comic Sans MS');
 	if (td == 1) {
-		text(errors,x+20,y+50,580/2,250/2);
+		for (let i = 0; i <= consoletext.length; i++){
+			text(consoletext[i],x+20,y+50+i*20,580/2,250/2-i*20);
+		}
 	}
 }
 
