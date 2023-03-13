@@ -44,6 +44,10 @@ function draw_one_frame(cur_frac) {
 		drawCursor(200,200);
 		drawWindow(100,100);
 	}
+
+	//glitches
+	stroke('#fa2a8b');
+	line(700, 0, 700, 1500)
 }
 
 function drawWindow(x,y,td){
