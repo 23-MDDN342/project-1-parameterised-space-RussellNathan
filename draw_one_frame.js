@@ -21,7 +21,8 @@ function draw_one_frame(cur_frac) {
 	for(let i = 0; i <= trail; i++){
 		let ghost_frac = (cur_frac+=1/trail)%1;
 		if (i == trail) {td = 1;} else {td = 0;}
-		drawWindow(150+ sin(1-ghost_frac*TWO_PI)*120,100+ sin(ghost_frac*TWO_PI)*100,td);
+		//draw the window (x position, y position, is draw text true, text scroll position)
+		drawWindow(150+ sin(1-ghost_frac*TWO_PI)*120,100+ sin(ghost_frac*TWO_PI)*100,td,floor(cur_frac*2)-1);
 	}
 
 	//cursor
@@ -50,16 +51,19 @@ function draw_one_frame(cur_frac) {
 	line(700, 0, 700, 1500)
 }
 
-function drawWindow(x,y,td){
+function drawWindow(x,y,td,l){
 	fill('#fa2a8b');
 	rect(x, y, 640/2, 360/2);
 	rect(x+5, y+5, 640/2-10, 36-10);
 	fill('white');
 	textSize(16);
 	textFont('Comic Sans MS');
+	textWrap(CHAR);
 	if (td == 1) {
 		for (let i = 0; i <= consoletext.length; i++){
 			text(consoletext[i],x+20,y+50+i*20,580/2,250/2-i*20);
+			//skip a line for every line the text exceeds the word wrap limit for
+			i += floor(consoletext[i+l].length/38);
 		}
 	}
 }
