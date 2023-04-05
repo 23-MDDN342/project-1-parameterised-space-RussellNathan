@@ -13,7 +13,7 @@ function preload() {
 }
 
 function draw_one_frame(cur_frac) {
-	background('#55abe3');
+	background('#fcfc79');
 
 	strokeWeight(height/270);
 	
@@ -23,19 +23,19 @@ function draw_one_frame(cur_frac) {
 		let ghost_frac = (cur_frac+=1/trail)%1;
 		if (i == trail) {td = 1;} else {td = 0;}
 		//draw the window (x position, y position, is draw text true, text scroll position)
-		drawWindow(0.16*width + sin(1-ghost_frac*TWO_PI)*width/8, height/5 + sin(ghost_frac*TWO_PI)*height/6,td,cur_frac);
+		drawWindow(0.4*width -sin(0-ghost_frac*TWO_PI*2)*width/4, height/4 + sin(ghost_frac*TWO_PI)*height/5.25,td,cur_frac);
 	}
 
 	//cursor
 	strokeWeight(2);
 	strokeCap(PROJECT);
 	strokeJoin(ROUND);
-	fill("white");
-	stroke("black");
+	fill(240);
+	stroke(20);
 	for(let i = 0; i <= t*trail; i++){
 		let ghost_frac = (cur_frac+=1/trail)%1;
-		let cur_x = 300+200*sin(ghost_frac*TWO_PI);
-		let cur_y = 200+100*sin(ghost_frac*4*PI);
+		let cur_x = 250+220*sin(ghost_frac*TWO_PI);
+		let cur_y = 320+120*sin(ghost_frac*4*PI);
 
 		drawCursor(cur_x,cur_y,width/960);
 	}
@@ -48,14 +48,12 @@ function draw_one_frame(cur_frac) {
 			drawCursor(300+200*sin(i*TWO_PI),200+100*sin(i*4*PI),width/960);
 		}
 		for(let i = 0.1; i <= 1; i+=1/12){
-			drawWindow(
-			0.16*width 	+ 	sin(1-i*TWO_PI)*width/8, 
-			height/5 	+	sin(i*TWO_PI)*height/6);
+			drawWindow(0.4*width -sin(0-i*TWO_PI*2)*width/4, height/4 + sin(i*TWO_PI)*height/5.25,0);
 		}
 		stroke("darkred");
 		strokeWeight(4);
 		drawCursor(300+200*sin(TWO_PI),200+100*sin(4*PI),width/960);
-		drawWindow(0.16*width + sin(1-TWO_PI)*width/8, height/5 + sin(TWO_PI)*height/6,1,1);
+		drawWindow(0.4*width -sin(0-TWO_PI*2)*width/4, height/4 + sin(TWO_PI)*height/5.25,0);
 	}
 
 	//glitches
@@ -70,9 +68,9 @@ function drawWindow(x,y,td,l){
 	push();
 	if (td == 1) {
 		noStroke();
-		fill('darkblue');
+		fill('#55abe3');
 		rect(x+border, y+border+height/30, width/3-border*2, height/3.4-border);
-		fill('white');
+		fill(240);
 		textSize(width/60);
 		textFont('Comic Sans MS');
 		textWrap(CHAR);
