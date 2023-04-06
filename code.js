@@ -1,10 +1,10 @@
 // these can be customized
 const debugViewText = "#ff0000";
 const debugZoomBackground = "#555588"
-const debugZoomScale = 0.5;
+const debugZoomScale = 0.8;
 
 // this can be modified after we discuss in lecture
-const buffersPerFrame = 1;
+const buffersPerFrame = 2;
 
 // probably best not to modify anything below this line
 const frameMax = 24;
